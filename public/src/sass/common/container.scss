@@ -1,8 +1,440 @@
+@import "./variables";
 .outer{
-	.inner{
-		width:640px;
-		height: 1136px;
-		background:blue;
+	.page{
+		@include layout();
+		height: auto;
+		position: relative;
 		visibility: hidden;
+		// overflow: hidden;
+		// background: red;
+	}
+	&.curtion{
+		position:absolute;
+		z-index: 20;
+		left:0;
+		top:0;
+		background: rgba(0,0,0,0.3);
+	}
+}
+
+.fixed{
+	position:fixed;
+	z-index:2;
+}
+.nav{
+	@include layout();
+	height:$navH+px;
+	z-index:10;
+	background:url($imgsPath+'/bg-nav.jpg') repeat-x top center;
+	.return{
+		@include absolute(0,0);
+		width:$navH+px;
+		height: $navH+px;
+		background:url($imgsPath+'/icon-return.png') no-repeat center center;
+		@include textIndent();
+	}
+	h1{
+		width:$pageW+px;
+		@include textCenter($navH);
+		font-size:$fontSize*3+px;
+	}
+	button{
+		@extend .return;
+		@include button();
+		left:$pageW - $navH+px;
+		background:url($imgsPath+'/icon-more.png') no-repeat center center;
+	}
+	dl{
+		width:$pageW/3+px;
+		height: $navH*2+px;
+		padding-top:$fontSize*2+px;
+		background:url($imgsPath+'/bg-more-dropdown.png') no-repeat center center;
+		@include absolute($pageW/3*2,$navH/2);
+		dt{
+			@include textCenter($pageW/10);
+			width:$navH*2+px;
+			margin: 0 auto;
+			height: $pageW/10+px;
+			border-bottom:1px solid $morebdb;
+			font-size:$fontSize*2.5+px;
+			color: $moreText;
+			&:last-child{
+				border-bottom:none;
+			}
+		}
+	}
+}
+.nav-down{
+	width:$pageW+px;
+	height: $navD+px;
+	position:relative;
+	z-index:10;
+	background:url($imgsPath+'/bg-nav-down.png') repeat-x top center;
+	p{
+		@include textCenter($navD);
+		font-size:$fontSize*2+px;
+		color:$shake;
+		&.left{
+			float: left;
+			padding-left:$fontSize+px;
+			color:$timeTo;
+			strong{
+				font-weight: normal;
+				padding:0 2px;
+			}
+			span{
+				color:$shake;
+				padding-left:10px;
+				font-weight: bold;
+			}
+		}
+		&.right{
+			background:url($imgsPath+'/icon-shake.png') no-repeat left center;
+			padding-left:$shakeLeft+px;
+			float:right;
+			padding-right:$fontSize+px;
+			font-weight: bold;
+		}
+	}
+}
+
+.table{
+	@include layout();
+	table{
+		@include textCenter($navH*0.58);
+		width:$pageW*0.9375+px;
+		font-size:$fontSize*2+px;
+		color:$table;
+		margin:0 auto;
+		margin-bottom:$fontSize*2+px;
+		tr{
+			th{
+				color:$shake;
+				border-bottom:1px solid $morebdb;
+			}
+			td{
+				line-height: $navH*0.5+px;
+			}
+		}
+		
+	}
+	.bottom{
+		width:100%;
+		height: $fontSize+2+px;
+		background:url($imgsPath+'/bg-table-bottom.png') no-repeat center bottom;
+		button{
+			@include button();
+			display: block;
+			position:absolute;
+			bottom:-3px;
+			left:276px;
+			width:$navH+px;
+			height: $navH/2+px;
+			background:url($imgsPath+'/icon-arrow-up.png') no-repeat center center;
+			@include textIndent();
+			&.rotate{
+				transform: rotate(180deg);
+				-webkit-transform:rotate(180deg);
+				-moz-transition: rotate(180deg);
+				bottom:-14px;
+			}
+		}	
+	}
+	
+}
+
+.sections{
+	width:$pageW+px;
+	overflow:auto;
+	position:absolute;
+	padding:$fontSize+px 0;
+	
+	section{
+		width:$pageW - 40 +px;
+		margin: 0 auto;
+		margin-top:$fontSize+px;
+		h2{
+			border-bottom:1px solid $hLine;
+			height: $fontSize*4+px;
+			font-size:$fontSize*3 - 6+px;
+			color:$hColor;
+			line-height: $fontSize*5+px;
+			strong{
+				// display: block;
+				float: right;
+				position:relative;
+				right: 0;
+				background:$hBg;
+				width:$pageW/7+px;
+				height: $fontSize*4+px;
+				overflow: hidden;
+				line-height: $fontSize*4+px;
+				bottom:0;
+				text-align: center;
+				font-weight: normal;
+			}
+		}
+		ul{
+			width:auto;
+			margin:0 auto;
+			li{
+				display: inline-block;
+				width:115px;
+				text-align: center;
+				margin:10px $fontSize+px;
+				box-sizing:border-box;
+				div{
+					width:$ballW+px;
+					height: $ballW+px;
+					border-radius:50%;
+					border:1px dashed $ballBd;
+					background:$ballBg;
+					margin:0 auto;
+					line-height: $ballW+px;
+					font-size:$fontSize*3+6+px;
+					font-family: Minion Pro;
+					color:$ballText;
+					font-weight: bold;
+					overflow: hidden;
+					&.active{
+						background: $ballActive;
+						color:$fontColor;
+						border:none;
+					}
+				}
+				span{
+					color:$betCount;
+					font-size:$fontSize*3 - 6 +px;
+					line-height: $fontSize*3 + 4 +px;
+				}
+				i{
+					color:$liText;
+					font-size:$fontSize*2+px;
+					line-height: $fontSize*4 +px;
+				}
+			}
+			&.smallFont li div{
+				font-size:$fontSize*3 - 6+px;
+			}
+		}
+		&:first-child{
+			ul{
+				li{
+					margin:10px 0;
+				}
+			}
+		}
+		&.last{
+			h2{
+				strong{
+					line-height: $fontSize*2+px;
+					em{
+						padding:0 5px;
+						font-size:$fontSize*2+px;
+						display: inline-block;
+						width:90px;
+						text-align: left;
+						height: 18px;
+						&:last-child{
+							text-align: right;
+						}
+					}
+				}
+				figure{
+				    width: 101px;
+				    height: 1px;
+				    background: $fontColor;
+				    position: relative;
+				    transform: rotate(-29deg);
+				    -webkit-transform: rotate(-29deg);
+				    left: 503px;
+				    top: -36px;
+				}
+			}
+			ul{
+				margin-left:75px;
+			}
+		}
+	}
+	.tip{
+		width:$pageW/5+px;
+		height: $navH+px;
+		position:absolute;
+		left:0;
+		top:0;
+		background:url($imgsPath+'/icon-arrow-tip.png') no-repeat center top;
+		font-size:$fontSize*2 - 4+px;
+		text-align: center;
+		color:$ballcancel;
+		line-height: $fontSize*12+px;
+		&.active{
+			height: auto;
+			line-height: $fontSize*3+px;
+			background: none;
+			background:red;
+			color:$fontColor;
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+.footer{
+	width:$pageW+px;
+	height:$fontSize*8.7+px;
+	background:url($imgsPath+'/bg-footer.png') repeat-x center bottom;
+	position:fixed;
+	bottom:0;
+	overflow:hidden;
+	ol{
+		width:100%;
+		height: $navH - 7+px;
+		position:absolute;
+		top:$pageW/32+px;
+		li{
+			display: inline-block;
+			height: $navH - 7+px;
+			position:relative;
+			color:$fontColor;
+			// background: url($imgsPath+'/bg-footer-bd.png') no-repeat left top;
+			width:$fontSize*20px;
+			float:left;
+			.middle{
+				width:$fontSize*18px;
+				position:absolute;
+				font-size:$fontSize*2+px;
+				line-height:$fontSize*2+px;
+				margin-left:$fontSize*2+px;
+				&:last-child{
+					text-align: right;
+					top:$navH/2+px;
+					font-size:$fontSize*3 - 6+px;
+				}
+			}
+			&:first-child{
+				width:$fontSize*14+px;
+				background: url($imgsPath+'/icon-add.png') no-repeat $fontSize+px center;
+				strong{
+					display: block;
+					position:absolute;
+					font-size:$fontSize*3+px;
+					right: 0;
+					text-align:center;
+					width:$fontSize*10+px;
+					overflow: hidden;
+					line-height: $fontSize*3+px;
+					font-weight:normal;
+					&:last-child{
+						font-size:$fontSize+8 +px;;
+						top:$navH/2+px;
+					}
+				}
+			}
+			&:last-child{
+				float: right;
+				width:$navH*2+px;
+				background: url($imgsPath+'/icon-correct.png') no-repeat left center;
+				font-size:$fontSize*3 - 6+px;
+				color:$bet;
+				text-align: center;
+				// padding-left:$fontSize*3+px;
+				line-height: $navH - 7+px;
+				b{
+					width:$fontSize*4+px;
+					height: $fontSize*4+px;
+					position:absolute;
+					right:$fontSize/2+px;
+					top:-$fontSize/2+px;
+					line-height: $fontSize*4+px;
+					text-align: center;
+					color:$fontColor;
+					border-radius:50%;
+					background: $betCount;
+					font-weight: normal;
+				}
+			}
+		}
+	}
+}
+
+.alert{
+	width:575px;
+	height:245px;
+	position:absolute;
+	left:25px;
+	top:400px;
+	border-radius:5px;
+	background:#fdfcfc;
+	font-size:30px;
+	h2{
+		text-align: center;
+		margin:60px auto;
+		color:#666666;
+	}
+	button{
+		width:265px;
+		height: 65px;
+		color:#808080;
+		text-align: center;
+		line-height: 65px;
+		border-radius:10px;
+		background: #f3f3f2;
+		margin-left: 12px;
+		border:1px solid #bfbfbf;
+	}
+}
+
+.bet{
+	width:580px;
+	height:350px;
+	position:absolute;
+	top:245px;
+	left:25px;
+	border-radius:10px;
+	background:#fefeff;
+	h2{
+		height: 70px;
+		line-height: 70px;
+		text-align: center;
+		font-size:30px;
+		color:#666666;
+		border-bottom:1px solid #e6e6e6;
+	}
+	button{
+		width:132px;
+		height: 55px;
+		margin:20px;
+		font-size:26px;
+		line-height: 55px;
+		text-align: center;
+		color:#808080;
+		background: #f5f5f4;
+		border-radius:8px;
+		border:1px solid #e6e6e6;
+		&.ml{
+			margin-left:50px;
+		}
+	}
+	.inputs{
+		label{
+			font-size:26px;
+			margin-left:30px;
+			margin-right: 20px;
+			color:#4c4c4c;
+		}
+		input{
+			width:335px;
+			height: 68px;
+			border-radius:8px;
+			border:1px solid #24c6de;
+			font-size:26px;
+			text-indent:15px;
+		}
 	}
 }

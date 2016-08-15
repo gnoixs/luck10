@@ -1,8 +1,392 @@
-.outer .inner {
+.outer .page {
+  position: relative;
+  left: 0;
+  top: 0;
   width: 640px;
-  height: 1136px;
-  background: blue;
+  height: auto;
+  position: relative;
   visibility: hidden; }
+
+.outer.curtion {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3); }
+
+.fixed {
+  position: fixed;
+  z-index: 2; }
+
+.nav {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 640px;
+  height: 87px;
+  z-index: 10;
+  background: url("/build/imgs/bg-nav.jpg") repeat-x top center; }
+  .nav .return, .nav button {
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 87px;
+    height: 87px;
+    background: url("/build/imgs/icon-return.png") no-repeat center center;
+    text-indent: -9999px; }
+  .nav h1 {
+    width: 640px;
+    font-family: "SimSun";
+    font-size: 12px;
+    color: #ffffff;
+    height: 87px;
+    line-height: 87px;
+    text-align: center;
+    font-size: 36px; }
+  .nav button {
+    border: none;
+    outline: none;
+    display: block;
+    left: 553px;
+    background: url("/build/imgs/icon-more.png") no-repeat center center; }
+  .nav dl {
+    width: 213.33333px;
+    height: 174px;
+    padding-top: 24px;
+    background: url("/build/imgs/bg-more-dropdown.png") no-repeat center center;
+    display: block;
+    position: absolute;
+    left: 426.66667px;
+    top: 43.5px; }
+    .nav dl dt {
+      font-family: "SimSun";
+      font-size: 12px;
+      color: #ffffff;
+      height: 64px;
+      line-height: 64px;
+      text-align: center;
+      width: 174px;
+      margin: 0 auto;
+      height: 64px;
+      border-bottom: 1px solid #eeeeee;
+      font-size: 30px;
+      color: #999999; }
+      .nav dl dt:last-child {
+        border-bottom: none; }
+
+.nav-down {
+  width: 640px;
+  height: 63px;
+  position: relative;
+  z-index: 10;
+  background: url("/build/imgs/bg-nav-down.png") repeat-x top center; }
+  .nav-down p {
+    font-family: "SimSun";
+    font-size: 12px;
+    color: #ffffff;
+    height: 63px;
+    line-height: 63px;
+    text-align: center;
+    font-size: 24px;
+    color: #02a9c2; }
+    .nav-down p.left {
+      float: left;
+      padding-left: 12px;
+      color: #666666; }
+      .nav-down p.left strong {
+        font-weight: normal;
+        padding: 0 2px; }
+      .nav-down p.left span {
+        color: #02a9c2;
+        padding-left: 10px;
+        font-weight: bold; }
+    .nav-down p.right {
+      background: url("/build/imgs/icon-shake.png") no-repeat left center;
+      padding-left: 55px;
+      float: right;
+      padding-right: 12px;
+      font-weight: bold; }
+
+.table {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 640px; }
+  .table table {
+    font-family: "SimSun";
+    font-size: 12px;
+    color: #ffffff;
+    height: 50.46px;
+    line-height: 50.46px;
+    text-align: center;
+    width: 600px;
+    font-size: 24px;
+    color: #333333;
+    margin: 0 auto;
+    margin-bottom: 24px; }
+    .table table tr th {
+      color: #02a9c2;
+      border-bottom: 1px solid #eeeeee; }
+    .table table tr td {
+      line-height: 43.5px; }
+  .table .bottom {
+    width: 100%;
+    height: 14px;
+    background: url("/build/imgs/bg-table-bottom.png") no-repeat center bottom; }
+    .table .bottom button {
+      border: none;
+      outline: none;
+      display: block;
+      display: block;
+      position: absolute;
+      bottom: -3px;
+      left: 276px;
+      width: 87px;
+      height: 43.5px;
+      background: url("/build/imgs/icon-arrow-up.png") no-repeat center center;
+      text-indent: -9999px; }
+      .table .bottom button.rotate {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        -moz-transition: rotate(180deg);
+        bottom: -14px; }
+
+.sections {
+  width: 640px;
+  overflow: auto;
+  position: absolute;
+  padding: 12px 0; }
+  .sections section {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 12px; }
+    .sections section h2 {
+      border-bottom: 1px solid #d9eaec;
+      height: 48px;
+      font-size: 30px;
+      color: #038ca0;
+      line-height: 60px; }
+      .sections section h2 strong {
+        float: right;
+        position: relative;
+        right: 0;
+        background: #d4f4f9;
+        width: 91.42857px;
+        height: 48px;
+        overflow: hidden;
+        line-height: 48px;
+        bottom: 0;
+        text-align: center;
+        font-weight: normal; }
+    .sections section ul {
+      width: auto;
+      margin: 0 auto; }
+      .sections section ul li {
+        display: inline-block;
+        width: 115px;
+        text-align: center;
+        margin: 10px 12px;
+        box-sizing: border-box; }
+        .sections section ul li div {
+          width: 75px;
+          height: 75px;
+          border-radius: 50%;
+          border: 1px dashed #afd7dd;
+          background: #e5f5f7;
+          margin: 0 auto;
+          line-height: 75px;
+          font-size: 42px;
+          font-family: Minion Pro;
+          color: #51abb9;
+          font-weight: bold;
+          overflow: hidden; }
+          .sections section ul li div.active {
+            background: #0bc4d7;
+            color: #ffffff;
+            border: none; }
+        .sections section ul li span {
+          color: #ffaf1a;
+          font-size: 30px;
+          line-height: 40px; }
+        .sections section ul li i {
+          color: #60b1be;
+          font-size: 24px;
+          line-height: 48px; }
+      .sections section ul.smallFont li div {
+        font-size: 30px; }
+    .sections section:first-child ul li {
+      margin: 10px 0; }
+    .sections section.last h2 strong {
+      line-height: 24px; }
+      .sections section.last h2 strong em {
+        padding: 0 5px;
+        font-size: 24px;
+        display: inline-block;
+        width: 90px;
+        text-align: left;
+        height: 18px; }
+        .sections section.last h2 strong em:last-child {
+          text-align: right; }
+    .sections section.last h2 figure {
+      width: 101px;
+      height: 1px;
+      background: #ffffff;
+      position: relative;
+      transform: rotate(-29deg);
+      -webkit-transform: rotate(-29deg);
+      left: 503px;
+      top: -36px; }
+    .sections section.last ul {
+      margin-left: 75px; }
+  .sections .tip {
+    width: 128px;
+    height: 87px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("/build/imgs/icon-arrow-tip.png") no-repeat center top;
+    font-size: 20px;
+    text-align: center;
+    color: #0bb5cf;
+    line-height: 144px; }
+    .sections .tip.active {
+      height: auto;
+      line-height: 36px;
+      background: none;
+      background: red;
+      color: #ffffff; }
+
+.footer {
+  width: 640px;
+  height: 104.4px;
+  background: url("/build/imgs/bg-footer.png") repeat-x center bottom;
+  position: fixed;
+  bottom: 0;
+  overflow: hidden; }
+  .footer ol {
+    width: 100%;
+    height: 80px;
+    position: absolute;
+    top: 20px; }
+    .footer ol li {
+      display: inline-block;
+      height: 80px;
+      position: relative;
+      color: #ffffff;
+      width: 240px;
+      float: left; }
+      .footer ol li .middle {
+        width: 216px;
+        position: absolute;
+        font-size: 24px;
+        line-height: 24px;
+        margin-left: 24px; }
+        .footer ol li .middle:last-child {
+          text-align: right;
+          top: 43.5px;
+          font-size: 30px; }
+      .footer ol li:first-child {
+        width: 168px;
+        background: url("/build/imgs/icon-add.png") no-repeat 12px center; }
+        .footer ol li:first-child strong {
+          display: block;
+          position: absolute;
+          font-size: 36px;
+          right: 0;
+          text-align: center;
+          width: 120px;
+          overflow: hidden;
+          line-height: 36px;
+          font-weight: normal; }
+          .footer ol li:first-child strong:last-child {
+            font-size: 20px;
+            top: 43.5px; }
+      .footer ol li:last-child {
+        float: right;
+        width: 174px;
+        background: url("/build/imgs/icon-correct.png") no-repeat left center;
+        font-size: 30px;
+        color: #dddddd;
+        text-align: center;
+        line-height: 80px; }
+        .footer ol li:last-child b {
+          width: 48px;
+          height: 48px;
+          position: absolute;
+          right: 6px;
+          top: -6px;
+          line-height: 48px;
+          text-align: center;
+          color: #ffffff;
+          border-radius: 50%;
+          background: #ffaf1a;
+          font-weight: normal; }
+
+.alert {
+  width: 575px;
+  height: 245px;
+  position: absolute;
+  left: 25px;
+  top: 400px;
+  border-radius: 5px;
+  background: #fdfcfc;
+  font-size: 30px; }
+  .alert h2 {
+    text-align: center;
+    margin: 60px auto;
+    color: #666666; }
+  .alert button {
+    width: 265px;
+    height: 65px;
+    color: #808080;
+    text-align: center;
+    line-height: 65px;
+    border-radius: 10px;
+    background: #f3f3f2;
+    margin-left: 12px;
+    border: 1px solid #bfbfbf; }
+
+.bet {
+  width: 580px;
+  height: 350px;
+  position: absolute;
+  top: 245px;
+  left: 25px;
+  border-radius: 10px;
+  background: #fefeff; }
+  .bet h2 {
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    font-size: 30px;
+    color: #666666;
+    border-bottom: 1px solid #e6e6e6; }
+  .bet button {
+    width: 132px;
+    height: 55px;
+    margin: 20px;
+    font-size: 26px;
+    line-height: 55px;
+    text-align: center;
+    color: #808080;
+    background: #f5f5f4;
+    border-radius: 8px;
+    border: 1px solid #e6e6e6; }
+    .bet button.ml {
+      margin-left: 50px; }
+  .bet .inputs label {
+    font-size: 26px;
+    margin-left: 30px;
+    margin-right: 20px;
+    color: #4c4c4c; }
+  .bet .inputs input {
+    width: 335px;
+    height: 68px;
+    border-radius: 8px;
+    border: 1px solid #24c6de;
+    font-size: 26px;
+    text-indent: 15px; }
 
 /**
   * from ionic
@@ -340,3 +724,4 @@ table {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
+

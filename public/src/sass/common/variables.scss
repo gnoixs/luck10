@@ -1,0 +1,58 @@
+$fontFam: 'SimSun';
+$fontSize:12;
+$fontColor:#ffffff;
+$pageW : 640;
+$navH  : 87;
+$imgsPath  : '/build/imgs';
+$morebdb:#eeeeee;
+$moreText:#999999;
+$navD:63;
+$shake:#02a9c2;
+$timeTo:#666666;
+$shakeLeft:55;
+$table:#333333;
+$bet:#dddddd;
+$betCount:#ffaf1a;
+$hLine:#d9eaec;
+$hColor:#038ca0;
+$hBg:#d4f4f9;
+$ballBg:#e5f5f7;
+$ballBd:#afd7dd;
+$ballW:75;
+$ballText:#51abb9;
+$liText:#60b1be;
+$ballActive:#0bc4d7;
+$ballcancel:#0bb5cf;
+
+@mixin layout(){
+	position:relative;
+	left:0;
+	top:0;
+	width:$pageW+px;
+}
+
+@mixin textIndent(){
+	text-indent:-9999px;
+}
+
+@mixin textCenter($_h){
+	font-family:$fontFam;
+	font-size:$fontSize+px;
+	color:$fontColor;
+	height: $_h+px;
+	line-height: $_h+px;
+	text-align: center;
+}
+
+@mixin button(){
+	border:none;
+	outline:none;
+	display: block;
+}
+
+@mixin absolute($left,$top){
+	display:block;
+	position:absolute;
+	left:$left+px;
+	top:$top+px;
+}
