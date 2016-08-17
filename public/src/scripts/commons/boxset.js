@@ -80,7 +80,8 @@ $(function(){
 				$('#alert').hide();
 			break;
 			case 'shakecomfirm': 								//摇一摇确认清空
-				handleShake();
+				clearUp();
+				$('#alert').hide();
 			break;
 			case 'rebet':
 				$('#confirm').hide();
@@ -133,46 +134,43 @@ $(function(){
 	var x=y=_x=_y=null;			//touchstart,touchmove最原始的坐标
 	var _target = null;			//目标对象
 	var isMoved = false;
+	var stepBack = false;
 
 	var choosed = [];			//选球
 
 
+//第一个阶段
 	$('.sections ul li div').on('touchstart',function(evt){
 		
-		 x = evt.target.offsetLeft;		
+		 x = evt.target.offsetLeft;			//touchmove 判断区域的时候回用到
 		 y = evt.target.offsetTop;
 
 		 _target = $(evt.target);
 
-		// _x = evt.touches[0].pageX / zoom;
-		// _y = evt.touches[0].pageY / zoom;
+		_x = evt.touches[0].pageX / zoom;
+		_y = evt.touches[0].pageY / zoom;
 
-		 _target.attr('choose','y');
+		//_target.attr('choose','y');
+
+		 var _width = parseFloat($('.tip').css('width').replace(/px/,''));
+		 var _height = parseFloat($('.tip').css('height').replace(/px/,''));
 
 		 _target.prev().text('+'+getBetUnit()).css('visibility','visible');
 		 
 		 removeBetAnim(_target);
 
-		//需要设置的数据
-		var __x = x;
-		var __y = y;
-		if(__x <= 52){
-			__x += 75/2;
-		}else{
-			__x -= 85;
+		//需要设置的数据		
+		var __x = _x - _width;
+		var __y = _y - 150 + $('.sections')[0].scrollTop;
+
+		if(__x <= 0){			//左边不够显示
+			__x += _width;
+			//__y -=_height;	//？显示在上边
 		}
 
-		/*var __x = _x;
-		//var __y = _y;
-		var __y = _y - 150 + $('.sections')[0].scrollTop;
-		if(__x <= 52){
-			__x += 75/2;
-		}else{
-			__x -= 85;
-		}*/
 		$(this).addClass('active');
 		
-		$('.tip').css({'left': __x +'px','top' : __y + 75  +'px'});
+		$('.tip').css({'left': __x +'px','top' : __y +'px'});
 
 
 		_timeout = setTimeout(function(){
@@ -184,8 +182,11 @@ $(function(){
 		},1000);
 	});
 
-	$('.sections ul li div').on('touchmove',function(evt){
+//第二个阶段
+	$('.sections ul li div').on('touchmove', function(evt){
 		evt.preventDefault();	
+
+		var _width = parseFloat($('.tip').css('width').replace(/px/,''));
 
 		clearTimeout(_timeout);
 		clearInterval(_interval);
@@ -198,43 +199,71 @@ $(function(){
 		_y = evt.touches[0].pageY / zoom;
 		
 		//需要设置的数据
-		var __x = _x - 172;
+		var __x = _x - _width;
 		var __y = _y;
-
-		if(__x > 640 - 128){
-			__x -= 128;
+		//console.log('before:'+__x,__y);
+		if(__x <= 0){		//左边界
+			__x += _width;	
+			if(__x<=0){
+				__x = 0;
+			}
+		}
+		if(__x >= 640 - _width){	//右边界
+			__x = 640 - _width;
 		}
 		__y = _y - 150 + $('.sections')[0].scrollTop;
 		
-		showTip(__x,__y);
+		if(__y <= 0){			//上边界
+			__y = 0;
+		}
 		
-		if(_x -x < 0 || _x - x > 75 || __y - y < 0 || __y - y > 75){
-			isMoved = true;
-			tipActive(__x,__y);
+		if(__y >= parseFloat($('.sections').css('height')) - parseFloat($('.tip').css('height')) +$('.sections')[0].scrollTop){		//下边界
+			__y = parseFloat($('.sections').css('height')) - parseFloat($('.tip').css('height')) + $('.sections')[0].scrollTop;
+		}
+		//console.log('after:'+__x,__y);
+		showTip(__x,__y);
+
+
+		if(_x -x < 0 || _x - x > 75 || __y - y < 0 || __y - y > 75){		//脱离目标触控区
+			//tipActive();
+			if(!stepBack){
+				tipActive();
+			}else{
+				$('.tip').hide();
+			}
+		}else{								//触控区域外
+			if(isMoved){	//说明第二次移入
+				stepBack = true;
+				tipRecover();
+				addBetAnim(_target,true);
+				cannelBet(_target,stepBack);
+			}
 		}
 		
 	});
+
+//第三个阶段	
 	$('.sections ul li div').on('touchend',function(evt){
+
 		clearTimeout(_timeout);
 		clearInterval(_interval);
-
-		addBetAnim(_target);
+		
 		tipRecover();
 
-		$(_target).next().text('￥'+getAddUp(_target)).css('visibility','visible');
-
-
-
-		if(isAready && isMoved){
-			cannelBet(_target);		
+		if(isAready && isMoved){			//持续按住了指定时间，且有移动
+			cannelBet(_target,stepBack);	
+			addBetAnim(_target,true);	
 		}else{
+			_target.attr('choose','y');
+			addBetAnim(_target);
+			$(_target).next().text('￥'+getAddUp(_target)).css('visibility','visible');		//设置一注的总金额
 			$('.betAmount').text(getBetAmount().length);
 			$('#total').text(getToalAmount(choosed));
 			//console.log(formatData(choosed));
 		}
-
 		initVarible();			
 	});
+
 
 	//变量初始化
 	function initVarible(){
@@ -244,7 +273,7 @@ $(function(){
 		x=y=_x=_y=null;			
 		_target = null;		
 		isMoved = false;
-		//isfirst = true;
+		stepBack = false;
 	}
 
 	//获取下注单位
@@ -257,18 +286,21 @@ $(function(){
 		_target.prev().css('visibility','hidden');
 		if(!isImdi){
 			_target.prev().addClass('transition');
+		}else{
+			_target.prev().removeClass('transition');
 		}
 		
 	}
 	//隐藏加注动画
-	function removeBetAnim(_target){
+	function removeBetAnim(){
 		_target.prev().removeClass('transition');
 	}
 
 	//跟随提示图标
-	function tipActive(__x,__y){
+	function tipActive(){
 		//$('.tip').text('松手撤销投注').addClass('active').show().css({'left': __x  +'px','top':  __y  +'px'});
 		$('.tip').text('松手撤销投注').addClass('active');
+		isMoved = true;
 	}
 	//只是显示提示
 	function showTip(__x,__y){
@@ -285,14 +317,23 @@ $(function(){
 		orgin += getBetUnit();
 		return orgin;
 	}
-	//取消一注
-	function cannelBet(_target){
-		_target.next().text('￥0').css('visibility','hidden');
-		_target.removeClass('active');
-		_target.attr('choose','n');
+
+	//取消或撤回
+	function cannelBet(_target,stepBack){
+		if(stepBack){			//上一步
+			if(_target.attr('choose') == 'n'){
+				_target.removeClass('active');
+			}
+		}else{					//取消
+			_target.next().text('￥0').css('visibility','hidden');
+			_target.removeClass('active');
+			_target.attr('choose','n');
+		}
 		$('.betAmount').text(getBetAmount().length);
-		$('#total').text(getToalAmount(choosed));
+		$('#total').text(getToalAmount(choosed));		
 	}
+
+
 	//一注的总金额
 	function getAddUp(_target){
 		var _o = parseFloat(_target.next().text().replace(/￥/,''));
@@ -300,7 +341,8 @@ $(function(){
 		return _o+_add;
 	}
 
-	//获取总的注数,返回数量和金额
+
+	//获取总的注数,返回数量和金额,组装信息数组
 	function getBetAmount(){
 		choosed = [];
 		$('.sections ul li div').each(function(index,ele){
@@ -308,8 +350,11 @@ $(function(){
 				choosed.push($(ele).attr('breed')+'-'+parseFloat($(ele).next().text().replace(/￥/,'')));
 			}
 		});
+		//console.log(choosed);
 		return choosed;
 	}
+
+
 
 	//获取总金额
 	function getToalAmount(arr){
@@ -320,6 +365,10 @@ $(function(){
 		}
 		return all;
 	}
+
+
+
+
 	//格式化数据
 	function formatData(arr){
 		var model = {
@@ -365,5 +414,17 @@ $(function(){
 
 		}
 		return model;
+	}
+
+	//清空
+	function clearUp(){
+		$('.sections ul li div').each(function(index, ele){
+			$(ele).attr('choose','n').removeClass('active');
+			$(ele).prev().text(0).css('visibility','hidden');
+			$(ele).next().text('￥0').css('visibility','hidden');
+			$('#betUnit').text('10元');
+			$('.betAmount').text(0);
+			$('#total').text(0);
+		});
 	}
 });

@@ -287,8 +287,7 @@
 		}
 	}
 	.tip{
-		// width:$pageW/5+px;
-		// height: $navH+px;
+		
 		width:101px;
 		height: 78px;
 		position:absolute;
@@ -300,7 +299,7 @@
 		color:$ballcancel;
 		line-height: $fontSize*12+px;
 		text-indent: -9999px;
-		background-color:green;
+		//background-color:green;
 		&.active{
 			// height: auto;
 			// line-height: $fontSize*3+px;
