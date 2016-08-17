@@ -27,7 +27,7 @@ $ballcancel:#0bb5cf;
 @mixin layout(){
 	position:relative;
 	left:0;
-	top:0;
+	// top:0;
 	width:$pageW+px;
 }
 
@@ -55,4 +55,29 @@ $ballcancel:#0bb5cf;
 	position:absolute;
 	left:$left+px;
 	top:$top+px;
+}
+
+@keyframes addBet{
+	from{
+		margin-top:-35px;
+		opacity: 1;
+		visibility: visible;
+	}
+	to{
+		margin-top:-70px;
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+@-webkit-keyframes addBet{
+	from{
+		margin-top:-35px;
+		opacity: 0;
+		visibility: visible;
+	}
+	to{
+		margin-top:-70px;
+		opacity: 1;
+		visibility: hidden;
+	}
 }

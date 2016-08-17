@@ -12,22 +12,22 @@
 		<div class="page">
 			<div class="fixed">
 				<nav class="nav">
-					<i class="return">back</i>
+					<i class="return" clickid='back'>back</i>
 					<h1>幸运10</h1>
-					<button>right</button>
-					<dl style="display: none;">
+					<button clickid='showmore'>right</button>
+					<dl style="display: none;" id="showMore">
 						<dt>玩法说明</dt>
 						<dt>排行榜</dt>
 					</dl>
 				</nav>
 				<div class="nav-down">
-					<p class="left">距<strong>024</strong>期截止<span>07:32</span></p>
-					<p class="right">摇一摇清空</p>
+					<p class="left">距<strong>024</strong>期截止<span id="timer">07:32</span></p>
+					<p class="right" clickid='shake'>摇一摇清空</p>
 				</div>
 				<div class="table">
-					<table style="display:none;">
+					<table style="display:none;" id="showLottery">
 						<tr><th>期号</th><th>开奖号码</th><th>大小</th><th>单双</th><th>龙虎</th></tr>
-						<tr><td>034</td><td>05631</td><td><img src="/<%= build %>/imgs/icon-refresh.png" alt='refresh'></td><td></td><td></td></tr>
+						<tr><td>034</td><td>05631</td><td><i clickid='refresh'></i></td><td></td><td></td></tr>
 						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
 						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
 						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
@@ -39,94 +39,125 @@
 						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
 						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
 					</table>
+					<p class="support"></p>
 					<div class="bottom">
-						<button class="rotate">down</button>
+						<button class="rotate" clickid='showlottery'>down</button>
 					</div>
 				</div>
 			</div>
-			<div class="sections" style="">
+			<div class="sections">
 				<section>
 					<h2>单点<strong>1:9.5</strong></h2>
 					<ul>
-						<li><span>+10</span><div>1</div><i>￥9888</i></li>
-						<li><span>+10</span><div>2</div><i>￥9888</i></li>
-						<li><span>+10</span><div class="active">3</div><i>￥9888</i></li>
-						<li><span>+10</span><div>4</div><i>￥9888</i></li>
-						<li><span>+10</span><div>5</div><i>￥9888</i></li>
-						<li><span>+10</span><div>6</div><i>￥9888</i></li>
-						<li><span>+10</span><div>7</div><i>￥9888</i></li>
-						<li><span>+10</span><div>8</div><i>￥9888</i></li>
-						<li><span>+10</span><div>9</div><i>￥9888</i></li>
-						<li><span>+10</span><div>0</div><i>￥9888</i></li>
+						<li><span>+10</span><div breed='one'  choose='n'>1</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='two'  choose='n'>2</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='the'  choose='n'>3</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='fur'  choose='n'>4</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='fiv'  choose='n'>5</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='six'  choose='n'>6</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='sev'  choose='n'>7</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='egt'  choose='n'>8</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='nie'  choose='n'>9</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='ten'  choose='n'>0</div><i>￥0</i></li>
 					</ul>
 				</section>
 				<section>
 					<h2>大小<strong>1:1.9</strong></h2>
 					<ul>
-						<li><span>+10</span><div>大</div><i>￥9888</i></li>
-						<li><span>+10</span><div class="active">小</div><i>￥9888</i></li>
-						<li><span>+10</span><div>单</div><i>￥9888</i></li>
-						<li><span>+10</span><div>双</div><i>￥9888</i></li>
+						<li><span>+10</span><div breed='b' choose='n'>大</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='x' choose='n'>小</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='s' choose='n'>单</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='d' choose='n'>双</div><i>￥0</i></li>
 					</ul>
 				</section>
 				<section>
 					<h2>组合<strong>1:4</strong></h2>
 					<ul class="smallFont">
-						<li><span>+10</span><div>大单</div><i>￥9888</i></li>
-						<li><span>+10</span><div>大双</div><i>￥9888</i></li>
-						<li><span>+10</span><div class="active">小单</div><i>￥9888</i></li>
-						<li><span>+10</span><div>小双</div><i>￥9888</i></li>
+						<li><span>+10</span><div breed='bs' choose='n'>大单</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='bd' choose='n'>大双</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='xs' choose='n'>小单</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='xd' choose='n'>小双</div><i>￥0</i></li>
 					</ul>
 				</section>
 				<section class="last">
 					<h2>龙虎<strong><em>1:2</em><em>1:18</em></strong><figure></figure></h2>
 					<ul>
-						<li><span>+10</span><div>龙</div><i>￥9888</i></li>
-						<li><span>+10</span><div>虎</div><i>￥9888</i></li>
-						<li><span>+10</span><div class="active">和</div><i>￥9888</i></li>
+						<li><span>+10</span><div breed='drag' choose='n'>龙</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='tiger' choose='n'>虎</div><i>￥0</i></li>
+						<li><span>+10</span><div breed='draw' choose='n'>和</div><i>￥0</i></li>
 					</ul>
 				</section>
 				<p class="tip" style="display:none;">下移撤销</p>
 			</div>
 			<footer class="footer">
 				<ol>
-					<li><strong>10元</strong><strong>点击更改</strong></li>
-					<li><strong class="middle">已选3注</strong><strong class="middle">共150元</strong></li>
-					<li><strong>投注</strong><b>3</b></li>
+					<li clickid='addchip'><strong id="betUnit">10元</strong><strong>点击更改</strong></li>
+					<li><strong class="middle">已选<span class="betAmount">0</span>注</strong><strong class="middle">共<span id="total">0</span>元</strong></li>
+					<li clickid='bet'><strong>投注</strong><b class="betAmount">0</b></li>
 				</ol>
 			</footer>
 		</div>
 	</div>
+
+
 	<!--清空弹窗-->
-	<div class="outer curtion" style="display:none;">
+	<div class="outer curtion" id="alert">
 		<div class="page">
 			<div class="alert">
 				<h2>撤销所选中的内容?</h2>
-				<button>确定</button>
-				<button>取消</button>
+				<button clickid='shakecomfirm'>确定</button>
+				<button clickid='shakecancel'>取消</button>
 			</div>
 		</div>
 	</div>
 
 	<!--选择金额-->
-	<div class="outer curtion" style="">
+	<div class="outer curtion" id="bet">
 		<div class="page">
 			<div class="bet">
 				<h2>请选择投注金额</h2>
-				<button class="ml">1元</button>
-				<button>10元</button>
-				<button>100元</button>
-				<button class="ml">500元</button>
-				<button>1000元</button>
-				<button>All in</button>
+				<button class="ml" count='1'>1元</button>
+				<button count='10'>10元</button>
+				<button count='100'>100元</button>
+				<button class="ml" count='500'>500元</button>
+				<button count='1000'>1000元</button>
+				<button count='2000'>All in</button>
 				<div class="inputs">
 					<label>手动输入金额</label>
-					<input type="number" id="money">
+					<input type="number" id="amount">
 				</div>
 			</div>
 		</div>
 	</div>
-
+<!--投注列表-->
+	<div class="outer curtion" id="confirm">
+		<div class="page">
+			<div class="confirm">
+				<h2>确认投注内容<i class="active" clickid='rebet'></i></h2>
+				<!-- <table>
+					<tr><th>玩法</th><th>注数</th><th>金额</th><th>赔率</th><th></th></tr>
+				</table> -->
+				<div class="table">					
+					<table>
+						<tr><th>玩法</th><th>注数</th><th>金额</th><th>赔率</th><th></th></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+					</table>
+				</div>
+				<p>共<span>6</span>注&nbsp;<span>300</span>元</p>
+				<button clickid="betconfirm">确定</button>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript" src="/libs/zepto/zepto.js"></script>
 	<script type="text/javascript" src="/<%= build %>/scripts/commons.js"></script>
 	<script type="text/javascript" src="/<%= build %>/scripts/index.js"></script>

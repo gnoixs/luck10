@@ -68,7 +68,7 @@
 	width:$pageW+px;
 	height: $navD+px;
 	position:relative;
-	z-index:10;
+	z-index:2;
 	background:url($imgsPath+'/bg-nav-down.png') repeat-x top center;
 	p{
 		@include textCenter($navD);
@@ -100,13 +100,15 @@
 
 .table{
 	@include layout();
+	//background:white;
 	table{
 		@include textCenter($navH*0.58);
 		width:$pageW*0.9375+px;
 		font-size:$fontSize*2+px;
 		color:$table;
 		margin:0 auto;
-		margin-bottom:$fontSize*2+px;
+		// margin-bottom:$fontSize*2+px;
+		background:#ffffff;
 		tr{
 			th{
 				color:$shake;
@@ -114,9 +116,21 @@
 			}
 			td{
 				line-height: $navH*0.5+px;
+				i{
+					display: block;
+					width:100%;
+					height: 100%;
+					background:url($imgsPath+'/icon-refresh.png') no-repeat center center; 
+				}
 			}
 		}
 		
+	}
+	p{
+		width:100%;
+		height:24px;
+		background:#ffffff;
+		display: none;
 	}
 	.bottom{
 		width:100%;
@@ -140,7 +154,6 @@
 			}
 		}	
 	}
-	
 }
 
 .sections{
@@ -148,7 +161,7 @@
 	overflow:auto;
 	position:absolute;
 	padding:$fontSize+px 0;
-	
+	overflow-x:hidden;
 	section{
 		width:$pageW - 40 +px;
 		margin: 0 auto;
@@ -177,6 +190,7 @@
 		ul{
 			width:auto;
 			margin:0 auto;
+			margin-top:30px;
 			li{
 				display: inline-block;
 				width:115px;
@@ -196,6 +210,7 @@
 					color:$ballText;
 					font-weight: bold;
 					overflow: hidden;
+					position:relative;
 					&.active{
 						background: $ballActive;
 						color:$fontColor;
@@ -203,14 +218,28 @@
 					}
 				}
 				span{
-					color:$betCount;
-					font-size:$fontSize*3 - 6 +px;
-					line-height: $fontSize*3 + 4 +px;
+					color: #ffaf1a;
+				    font-size: 30px;
+				    line-height: 40px;
+				    display: block;
+				    position: absolute;
+				    text-align: center;
+				    width: 110px;
+				    margin-top: -35px;
+				    opacity: 1;
+				    visibility: hidden;
+				    &.transition{
+						animation:addBet 0.4s ease;
+						-moz-animation:addBet 0.4s ease;
+						-webkit-animation:addBet 0.4s ease; 
+						-o-animation:addBet 0.4s ease; 
+				    }
 				}
 				i{
 					color:$liText;
 					font-size:$fontSize*2+px;
 					line-height: $fontSize*4 +px;
+					visibility:hidden;
 				}
 			}
 			&.smallFont li div{
@@ -225,6 +254,7 @@
 			}
 		}
 		&.last{
+			margin-bottom:30px;
 			h2{
 				strong{
 					line-height: $fontSize*2+px;
@@ -257,8 +287,10 @@
 		}
 	}
 	.tip{
-		width:$pageW/5+px;
-		height: $navH+px;
+		// width:$pageW/5+px;
+		// height: $navH+px;
+		width:101px;
+		height: 78px;
 		position:absolute;
 		left:0;
 		top:0;
@@ -267,23 +299,21 @@
 		text-align: center;
 		color:$ballcancel;
 		line-height: $fontSize*12+px;
+		text-indent: -9999px;
+		background-color:green;
 		&.active{
-			height: auto;
-			line-height: $fontSize*3+px;
-			background: none;
-			background:red;
-			color:$fontColor;
+			// height: auto;
+			// line-height: $fontSize*3+px;
+			// background: none;
+			// background:red;
+			// color:$fontColor;
+			width:172px;
+			height: 37px;
+			background:url($imgsPath+'/icon-bet-cancel.png') no-repeat center center;
 		}
 	}
 	
 }
-
-
-
-
-
-
-
 
 .footer{
 	width:$pageW+px;
@@ -323,7 +353,7 @@
 				strong{
 					display: block;
 					position:absolute;
-					font-size:$fontSize*3+px;
+					font-size:$fontSize*3 - 6+px;
 					right: 0;
 					text-align:center;
 					width:$fontSize*10+px;
@@ -333,6 +363,9 @@
 					&:last-child{
 						font-size:$fontSize+8 +px;;
 						top:$navH/2+px;
+					}
+					span{
+						padding:0 2px;
 					}
 				}
 			}
@@ -435,6 +468,101 @@
 			border:1px solid #24c6de;
 			font-size:26px;
 			text-indent:15px;
+		}
+	}
+}
+
+#confirm{
+	.page{
+		position:absolute;
+		bottom:0;
+		.confirm{
+			width:$pageW+px;
+			border-top-left-radius:15px;
+			border-top-right-radius:15px;
+			background: $fontColor;
+			h2{
+				font-size:30px;
+				color:#404040;
+				line-height: 75px;
+				padding-left:20px;
+				i{
+					width:75px;;
+					height: 75px;
+					background: url($imgsPath+'/icon-arrow-confirm.png') no-repeat center center;
+					float: right;
+					margin-right:10px;
+					&.active{
+						transform: rotate(180deg);
+						-webkit-transform: rotate(180deg);
+					}
+				}
+			}
+			.table{
+				width:640px;
+				max-height: 746px;
+				overflow: auto;
+				margin-bottom: 20px;
+				table{
+					width:600px;
+					margin:0 auto;
+					margin-bottom: 30px;
+					max-height: 746px;
+					tr{
+						border-bottom:1px solid #eeeeee;
+						
+						th{
+							color:#05a6bf;
+							font-size:24px;
+							height: 50px;
+							&:last-child{
+								width:108px;
+							}
+						}
+						td{
+							color:#666666;
+							font-size:30px;
+							text-align: center;
+							height: 87px;
+							line-height: 87px;
+							&:last-child{
+								background: url($imgsPath+'/icon-delete.png') no-repeat center center;
+							}
+						}
+						&:last-child{
+							border:none;
+						}
+					}
+				}
+			}
+			
+			p{
+				width:600px;
+				margin:0 auto;
+				text-align: right;
+				font-size:28px;
+				color:#666666;
+				padding-right:10px;
+				margin-bottom: 20px;
+				span{
+					font-size: 36px;
+					color:#059eb5;
+					padding:0 2px;
+				}
+			}
+			button{
+				width:300px;
+				height: 70px;
+				background:#dff5f8;
+				text-align: center;
+				line-height: 70px;
+				border-radius:8px;
+				border:1px solid #37cbe1;
+				font-size:30px;
+				color:#049eb5;
+				margin-left: 315px;
+				margin-bottom: 20px;
+			}
 		}
 	}
 }
