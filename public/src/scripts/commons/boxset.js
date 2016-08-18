@@ -1,6 +1,25 @@
 $(function(){
 
 	var zoom = window.innerWidth/640;
+	var choosed = [];			//选球
+
+	var test = [
+		{ q:31, n:'12481', b:'大',s:'双',d:'龙'},
+		{ q:32, n:'26632', b:'小',s:'双',d:'龙'},
+		{ q:34, n:'33483', b:'小',s:'双',d:'龙'},
+		{ q:35, n:'45424', b:'小',s:'单',d:'虎'},
+		{ q:33, n:'55485', b:'大',s:'双',d:'龙'},
+		{ q:36, n:'65486', b:'小',s:'单',d:'龙'},
+		{ q:37, n:'75487', b:'大',s:'双',d:'虎'},
+		{ q:38, n:'85488', b:'小',s:'单',d:'龙'},
+		{ q:39, n:'95489', b:'大',s:'双',d:'龙'},
+		{ q:30, n:'05480', b:'大',s:'双',d:'龙'},
+	];
+	
+
+
+
+
 
 	$(window).on('ready resize',function(){
 		//外层容器
@@ -45,6 +64,28 @@ $(function(){
 			time--;
 		}
 	},1000);
+
+	//开奖表格
+	function listLottery(test){
+		var tpl = "<tr><td>034</td><td><i clickid='refresh'></i></td><td></td><td></td><td></td></tr>";
+		$('#showLottery tbody').html('');
+
+		for(var i =0; i<test.length; i++){
+			var _b1 = test[i].b === '大' ? "s" : "b";
+			var _b2 = test[i].s === '双' ? "s" : "b";
+			var _b3 = test[i].d === '龙' ? "s" : "b";
+			tpl += "<tr>"+
+						"<td>"+test[i].q+"</td>"+
+						"<td><b class='b'>"+test[i].n.substr(0,1)+"</b><span class='s'>"+test[i].n.substr(1,3)+"</span><b class='b'>"+test[i].n.substr(4,1)+"</b></td>"+
+						"<td class="+_b1+">"+test[i].b+"</td>"+
+						"<td class="+_b2+">"+test[i].s+"</td>"+
+						"<td class="+_b3+">"+test[i].d+"</td>"+
+					"</tr>";
+		}
+		$('#showLottery tbody').append(tpl);
+	}
+	
+	listLottery(test);
 
 //功能点击
 	$('.page').on('click',function(evt){
@@ -99,7 +140,7 @@ $(function(){
 			$('#bet').show();
 			$('#amount').focus();
 		}else if($(this).attr('clickid') == 'bet'){
-			$('#confirm').show();
+			handleBet(choosed);
 		}
 	});
 	$('#amount').on('keypress',function(evt){ 	//输入的金额
@@ -121,9 +162,39 @@ $(function(){
 		$('#bet').hide();
 	});
 
-//清空所有
-	function handleShake(){
-		
+	$('.deleteBet').live('click',function(evt){
+		alert(12);
+	})
+
+	//投注
+	function handleBet(choosed){
+		var counts = 0;
+		var amounts = 0;
+		if(choosed.length == 0){
+			alert('请先投注');
+			return;
+		}
+		var bets = formatData(choosed);
+		var tpl = "";
+		for(var t in bets){
+			if(bets[t]['choose'].length>0){
+				tpl += "<tr><td>"+bets[t].type+"</td><td>"+bets[t].choose.length+"</td><td>"+getTotal(bets[t].choose)+"元</td><td>"+bets[t].rate+"</td><td class='deleteBet'></td></tr>"
+			}
+		}
+
+		function getTotal(arr){
+			var count = 0;
+			for(var i = 0; i< arr.length; i++){
+				count += parseFloat(arr[i].amount);	
+			}
+			amounts += count;
+			counts+=arr.length;
+			return count;
+		}		
+		$('#bets tbody').html('').append(tpl);
+		$('#betsCounts').text(counts);
+		$('#betsAmounts').text(amounts);
+		$('#confirm').show();
 	}
 //------------------------------------------------------------------------------------
 
@@ -136,7 +207,7 @@ $(function(){
 	var isMoved = false;
 	var stepBack = false;
 
-	var choosed = [];			//选球
+	
 
 
 //第一个阶段
@@ -184,6 +255,7 @@ $(function(){
 
 //第二个阶段
 	$('.sections ul li div').on('touchmove', function(evt){
+		
 		evt.preventDefault();	
 
 		var _width = parseFloat($('.tip').css('width').replace(/px/,''));
@@ -259,8 +331,10 @@ $(function(){
 			$(_target).next().text('￥'+getAddUp(_target)).css('visibility','visible');		//设置一注的总金额
 			$('.betAmount').text(getBetAmount().length);
 			$('#total').text(getToalAmount(choosed));
-			//console.log(formatData(choosed));
+			
 		}
+	//console.log(formatData(choosed));
+		dotRate();			//龙虎和赔率
 		initVarible();			
 	});
 
@@ -366,6 +440,30 @@ $(function(){
 		return all;
 	}
 
+	//l龙虎赔率改变
+	function dotRate(){
+		var arr = [];
+		$('.sections section.last ul li div').each(function(index, ele){
+			if($(ele).attr('choose') == 'y'){
+				arr.push(ele);
+			}
+		});
+		if(arr.length==3 || arr.length == 0){
+			$('#figure').removeClass('change').removeClass('rotate');
+		}else if(arr.length == 2){
+			if($(arr[arr.length-1]).attr('breed') == 'draw'){
+				$('#figure').addClass('change').addClass('rotate');
+			}else{
+				$('#figure').addClass('change');
+			}
+		}else{
+			if($(arr[0]).attr('breed') == 'draw'){
+				$('#figure').addClass('change').addClass('rotate');
+			}else{
+				$('#figure').addClass('change');
+			}
+		}
+	}
 
 
 
@@ -413,6 +511,7 @@ $(function(){
 			}
 
 		}
+		//choosed = model;
 		return model;
 	}
 
@@ -425,6 +524,18 @@ $(function(){
 			$('#betUnit').text('10元');
 			$('.betAmount').text(0);
 			$('#total').text(0);
+			choosed = [];
 		});
+	}
+
+	//清理一部分
+	function partClean($arr){
+		console.log('asdas');
+		/*$arr.removeClass('active');
+		$arr.prev().text(0).css('visibility','hidden');
+		$arr.next().text('￥0').css('visibility','hidden');*/
+		/*for(var i = 0; i<arr.length;i++){
+
+		}*/
 	}
 });

@@ -18,6 +18,14 @@
     opacity: 1;
     visibility: hidden; } }
 
+.b {
+  font-style: normal;
+  font-weight: normal;
+  color: #999999; }
+
+.s {
+  color: #333333; }
+
 .outer .page {
   position: relative;
   left: 0;
@@ -199,12 +207,12 @@
         float: right;
         position: relative;
         right: 0;
-        background: #d4f4f9;
-        width: 91.42857px;
-        height: 48px;
+        background-color: #d4f4f9;
+        width: 100px;
+        height: 39px;
         overflow: hidden;
-        line-height: 48px;
-        bottom: 0;
+        line-height: 39px;
+        bottom: -9px;
         text-align: center;
         font-weight: normal; }
     .sections section ul {
@@ -263,25 +271,33 @@
     .sections section.last {
       margin-bottom: 30px; }
       .sections section.last h2 strong {
-        line-height: 24px; }
+        line-height: 24px;
+        background: #ffffff; }
         .sections section.last h2 strong em {
-          padding: 0 5px;
-          font-size: 24px;
+          padding: 0 3px;
+          font-size: 22px;
           display: inline-block;
           width: 90px;
           text-align: left;
-          height: 18px; }
+          height: 18px;
+          position: relative;
+          z-index: 2;
+          top: -2px; }
           .sections section.last h2 strong em:last-child {
-            text-align: right; }
+            text-align: right;
+            top: -11px; }
       .sections section.last h2 figure {
-        width: 101px;
-        height: 1px;
-        background: #ffffff;
+        width: 100px;
+        height: 39px;
         position: relative;
-        transform: rotate(-29deg);
-        -webkit-transform: rotate(-29deg);
-        left: 503px;
-        top: -36px; }
+        left: 499px;
+        top: -52px;
+        background: url("/build/imgs/bg-tiger-drag.png") no-repeat center center; }
+        .sections section.last h2 figure.rotate {
+          transform: rotate(180deg);
+          -webkit-transform: rotate(180deg); }
+        .sections section.last h2 figure.change {
+          background: url("/build/imgs/bg-drag-tiger.png") no-repeat center center; }
       .sections section.last ul {
         margin-left: 75px; }
   .sections .tip {
@@ -865,3 +881,11 @@ table {
     margin-top: -70px;
     opacity: 1;
     visibility: hidden; } }
+
+.b {
+  font-style: normal;
+  font-weight: normal;
+  color: #999999; }
+
+.s {
+  color: #333333; }

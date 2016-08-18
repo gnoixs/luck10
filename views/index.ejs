@@ -26,18 +26,13 @@
 				</div>
 				<div class="table">
 					<table style="display:none;" id="showLottery">
-						<tr><th>期号</th><th>开奖号码</th><th>大小</th><th>单双</th><th>龙虎</th></tr>
-						<tr><td>034</td><td>05631</td><td><i clickid='refresh'></i></td><td></td><td></td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
-						<tr><td>034</td><td>05631</td><td>大</td><td>单</td><td>龙</td></tr>
+						<thead>
+							<tr><th>期号</th><th>开奖号码</th><th>大小</th><th>单双</th><th>龙虎</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>034</td><td><i clickid='refresh'></i></td><td></td><td></td><td></td></tr>
+						</tbody>
+						
 					</table>
 					<p class="support"></p>
 					<div class="bottom">
@@ -80,11 +75,11 @@
 					</ul>
 				</section>
 				<section class="last">
-					<h2>龙虎<strong><em>1:2</em><em>1:18</em></strong><figure></figure></h2>
+					<h2>龙虎<strong class="dot"><em>1:2</em><em>1:18</em></strong><figure class="" id="figure"></figure></h2>
 					<ul>
-						<li><span>+10</span><div breed='drag' choose='n'>龙</div><i>￥0</i></li>
-						<li><span>+10</span><div breed='tiger' choose='n'>虎</div><i>￥0</i></li>
-						<li><span>+10</span><div breed='draw' choose='n'>和</div><i>￥0</i></li>
+						<li><span>+10</span><div id="drag" breed='drag' choose='n'>龙</div><i>￥0</i></li>
+						<li><span>+10</span><div id="tiger" breed='tiger' choose='n'>虎</div><i>￥0</i></li>
+						<li><span>+10</span><div id="draw" breed='draw' choose='n'>和</div><i>￥0</i></li>
 					</ul>
 				</section>
 				<p class="tip" style="display:none;">下移撤销</p>
@@ -133,27 +128,21 @@
 	<div class="outer curtion" id="confirm">
 		<div class="page">
 			<div class="confirm">
-				<h2>确认投注内容<i class="active" clickid='rebet'></i></h2>
+				<h2>确认投注内容<i class="" clickid='rebet'></i></h2>
 				<!-- <table>
 					<tr><th>玩法</th><th>注数</th><th>金额</th><th>赔率</th><th></th></tr>
 				</table> -->
 				<div class="table">					
-					<table>
-						<tr><th>玩法</th><th>注数</th><th>金额</th><th>赔率</th><th></th></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
-						<tr><td>单点</td><td>3</td><td>50元</td><td>1.95</td><td></td></tr>
+					<table id="bets">
+						<thead>
+							<tr><th>玩法</th><th>注数</th><th>金额</th><th>赔率</th><th></th></tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
 					</table>
 				</div>
-				<p>共<span>6</span>注&nbsp;<span>300</span>元</p>
+				<p>共<span id="betsCounts">0</span>注&nbsp;<span id="betsAmounts">0</span>元</p>
 				<button clickid="betconfirm">确定</button>
 			</div>
 		</div>

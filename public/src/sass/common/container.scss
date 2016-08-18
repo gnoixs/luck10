@@ -177,12 +177,14 @@
 				float: right;
 				position:relative;
 				right: 0;
-				background:$hBg;
-				width:$pageW/7+px;
-				height: $fontSize*4+px;
+				background-color:$hBg;
+				// width:$pageW/7+px;
+				// height: $fontSize*4+px;
+				width:100px;
+				height: 39px;
 				overflow: hidden;
-				line-height: $fontSize*4+px;
-				bottom:0;
+				line-height: 39px;
+				bottom:-9px;
 				text-align: center;
 				font-weight: normal;
 			}
@@ -258,27 +260,46 @@
 			h2{
 				strong{
 					line-height: $fontSize*2+px;
+					background:#ffffff;
 					em{
-						padding:0 5px;
-						font-size:$fontSize*2+px;
+						padding:0 3px;
+						font-size:22px;
 						display: inline-block;
 						width:90px;
 						text-align: left;
 						height: 18px;
+						position:relative;
+						z-index: 2;
+						top:-2px;
 						&:last-child{
 							text-align: right;
+							top:-11px;
 						}
 					}
 				}
 				figure{
-				    width: 101px;
-				    height: 1px;
-				    background: $fontColor;
-				    position: relative;
-				    transform: rotate(-29deg);
-				    -webkit-transform: rotate(-29deg);
-				    left: 503px;
-				    top: -36px;
+					width:100px;
+					height: 39px;
+					position:relative;
+					left:499px;
+					top: -52px;
+					background:url($imgsPath+'/bg-tiger-drag.png') no-repeat center center;
+				
+				    // width: 101px;
+				    // height: 1px;
+				    // background: $fontColor;
+				    // position: relative;
+				    // transform: rotate(-29deg);
+				    // -webkit-transform: rotate(-29deg);
+				    // left: 503px;
+				    // top: -36px;
+				    &.rotate{
+				    	transform: rotate(180deg);
+				    	-webkit-transform: rotate(180deg);
+				    }
+				    &.change{
+				    	background:url($imgsPath+'/bg-drag-tiger.png') no-repeat center center;
+				    }
 				}
 			}
 			ul{
